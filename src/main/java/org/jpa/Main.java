@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,15 +15,19 @@ public class Main {
         try {
             tx.begin();
 
-            Member member = em.find(Member.class, 1L);
-            Order order = new Order(1L, OrderStatus.ORDER, member);
+            Member member1 = Member.builder()
+                    .id(3L)
+                    .name("test")
+                    .age(1)
+                    .rrn("123435")
+                    .createAt(LocalDateTime.now())
+                    .updateAt(LocalDateTime.now())
+                    .build();
 
-            List<Order> orders = member.getOrders();
-
-            em.persist(member);
-            em.persist(order);
+            em.persist(member1);
 
             tx.commit();
+
         } catch (Exception e) {
             tx.rollback();
         } finally {
