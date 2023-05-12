@@ -16,9 +16,9 @@ public class Main {
             tx.begin();
 
             Member member1 = Member.builder()
-                    .id(3L)
+                    .id(5L)
                     .name("test")
-                    .age(1)
+                    .age(1234)
                     .rrn("123435")
                     .createAt(LocalDateTime.now())
                     .updateAt(LocalDateTime.now())

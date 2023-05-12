@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(
         uniqueConstraints =
-        @UniqueConstraint(name = "unique_rrn", columnNames = {"RRN"})
+        @UniqueConstraint(name = "unique_rrn", columnNames = {"RRN", "AGE"})
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
@@ -23,7 +23,10 @@ public class Member {
 
     private int age;
 
-    @Column(name = "RRN")
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
+    @Column(name = "RRN", nullable = false)
     private String rrn;
 
     @Column(length = 50)
@@ -35,11 +38,15 @@ public class Member {
 
     private LocalDateTime updateAt;
 
+    @Transient
+    private String temp;
+
     @Builder
-    public Member(Long id, String name, int age, String rrn, String script, LocalDateTime createAt, LocalDateTime updateAt) {
+    public Member(Long id, String name, int age, RoleType roleType, String rrn, String script, LocalDateTime createAt, LocalDateTime updateAt) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.roleType = roleType;
         this.rrn = rrn;
         this.script = script;
         this.createAt = createAt;
