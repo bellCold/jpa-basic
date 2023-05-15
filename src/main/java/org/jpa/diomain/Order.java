@@ -1,2 +1,18 @@
-package org.jpa.diomain;public class Order {
+package org.jpa.diomain;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "ORDERS")
+public class Order {
+
+    @Id @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+
+    private LocalDateTime orderDate;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }

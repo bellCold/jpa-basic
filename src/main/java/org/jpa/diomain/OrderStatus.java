@@ -1,2 +1,5 @@
-package org.jpa.diomain;public enum OrderStatus {
+package org.jpa.diomain;
+
+public enum OrderStatus {
+    ORDER, CANCEL
 }

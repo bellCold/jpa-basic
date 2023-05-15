@@ -6,16 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Member {
+public class OrderItem {
+
     @Id @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    private String name;
+    private int orderPrice;
 
-    private String city;
-
-    private String street;
-
-    private String zipcode;
+    private int count;
 }
