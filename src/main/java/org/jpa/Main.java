@@ -1,5 +1,8 @@
 package org.jpa;
 
+import org.jpa.diomain.Member;
+import org.jpa.diomain.Team;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,6 +17,10 @@ public class Main {
         try {
             tx.begin();
 
+            Team team = new Team("TeamA");
+            em.persist(team);
+            Member member = new Member("bellCold", team);
+            em.persist(member);
             tx.commit();
 
         } catch (Exception e) {

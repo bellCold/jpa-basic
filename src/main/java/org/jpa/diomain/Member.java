@@ -1,21 +1,25 @@
 package org.jpa.diomain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+
+import javax.persistence.*;
 
 @Entity
+@Getter
 public class Member {
-    @Id @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @Id
+    @GeneratedValue
+    @Column(name = "member_id")
     private Long id;
 
-    private String name;
+    private String username;
 
-    private String city;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    private String street;
-
-    private String zipcode;
+    public Member(String username, Team team) {
+        this.username = username;
+        this.team = team;
+    }
 }
