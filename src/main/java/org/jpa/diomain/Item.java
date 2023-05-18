@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Item {

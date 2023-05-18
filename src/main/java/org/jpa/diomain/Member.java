@@ -1,13 +1,13 @@
 package org.jpa.diomain;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,10 +33,23 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> order = new ArrayList<>();
 
-    @Builder
-    public Member(String username, Address address) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    public Member(String username, Team team) {
         this.username = username;
-        this.address = address;
+        setTeam(team);
     }
 
+    private void setTeam(Team team) {
+        if (Objects.isNull(team)) {
+            return;
+        }
+        if (Objects.nonNull(this.team)) {
+            this.team.getMemberList().remove(this);
+        }
+        this.team = team;
+        team.getMemberList().add(this);
+    }
 }
